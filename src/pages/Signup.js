@@ -6,12 +6,14 @@ import Checkbox from "../components/Checkbox";
 import Button from "../components/Button";
 import classes from "../styles/Signup.module.css";
 
+import SignupImage from "../assets/images/signup.svg";
+
 function Signup() {
 	return (
 		<>
 			<h1>Create an account</h1>
-			<div class="column">
-				<Illustration />
+			<div className="column">
+				<Illustration image={SignupImage} alt_text="Signup" />
 				<Form className={`${classes.signup}`}>
 					<TextInput
 						type="text"
