@@ -24,7 +24,9 @@ export default function Login() {
 						placeholder="Enter password"
 						icon="lock"
 					/>
-					<Button text="Submit now" />
+					<Button>
+						<span>Submit now</span>
+					</Button>
 					<div className="info">
 						Don't have an account? <a href="signup.html">Signup</a>{" "}
 						instead.

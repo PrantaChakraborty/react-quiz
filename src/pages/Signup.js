@@ -36,7 +36,9 @@ function Signup() {
 						icon="lock_clock"
 					/>
 					<Checkbox text="I agree to the Terms & Conditions" />
-					<Button text="Submit now" />
+					<Button>
+						<span>Submit now</span>
+					</Button>
 					<div className="info">
 						Already have an account? <a href="login.html">Login</a>{" "}
 						instead.
