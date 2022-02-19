@@ -7,6 +7,7 @@ import Button from "../components/Button";
 import classes from "../styles/Signup.module.css";
 
 import SignupImage from "../assets/images/signup.svg";
+import { Link } from "react-router-dom";
 
 function Signup() {
 	return (
@@ -40,7 +41,7 @@ function Signup() {
 						<span>Submit now</span>
 					</Button>
 					<div className="info">
-						Already have an account? <a href="login.html">Login</a>{" "}
+						Already have an account? <Link to="/login">Login</Link>
 						instead.
 					</div>
 				</Form>
