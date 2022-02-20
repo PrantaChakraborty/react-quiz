@@ -1,7 +1,6 @@
 import React from "react";
 import Illustration from "../components/Illustration";
 import SignupImage from "../assets/images/signup.svg";
-
 import SignupForm from "../components/SignupForm";
 
 function Signup() {

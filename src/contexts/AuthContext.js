@@ -3,7 +3,7 @@ import "../components/firebase";
 import {
 	getAuth,
 	createUserWithEmailAndPassword,
-	updateCurrentUser,
+	updateProfile,
 	signInWithEmailAndPassword,
 	signOut,
 	onAuthStateChanged,
@@ -35,7 +35,7 @@ export function AuthProvider({ children }) {
 		await createUserWithEmailAndPassword(auth, email, password);
 
 		// update profile
-		await updateCurrentUser(auth.currentUser, {
+		await updateProfile(auth.currentUser, {
 			displayName: username,
 		});
 
