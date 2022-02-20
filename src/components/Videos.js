@@ -1,15 +1,30 @@
-import React from 'react'
-import classes from '../styles/Videos.module.css'
-import Video from './Video'
+import { Link } from "react-router-dom";
+import classes from "../styles/Videos.module.css";
+import Video from "./Video";
 function Videos() {
-  return (
-    <div className={classes.videos}>
-        <Video />
-        <Video />
-        <Video />
-        <Video />
-    </div>
-  )
+	return (
+		<div className={classes.videos}>
+			<Link to="/quiz">
+				<Video />
+			</Link>
+			<Link to="/quiz">
+				<Video />
+			</Link>
+			<Link to="/quiz">
+				<Video />
+			</Link>
+			<Link to="/quiz">
+				<Video />
+			</Link>
+			<Link to="/quiz">
+				<Video />
+			</Link>
+			<Link to="/quiz">
+				<Video />
+			</Link>
+			
+		</div>
+	);
 }
 
-export default Videos
+export default Videos;
