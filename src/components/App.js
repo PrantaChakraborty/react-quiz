@@ -9,6 +9,9 @@ import Results from "../pages/Results";
 import { AuthProvider } from "../contexts/AuthContext";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import PrivateRoute from "./PrivateRoute";
+
 function App() {
 	return (
 		<Router>
@@ -18,8 +21,22 @@ function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/signup" element={<Signup />} />
 						<Route path="/login" element={<Login />} />
-						<Route path="/quiz" element={<Quiz />} />
-						<Route path="/result" element={<Results />} />
+						<Route
+							path="/quiz"
+							element={
+								<PrivateRoute>
+									<Quiz />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path="/result"
+							element={
+								<PrivateRoute>
+									<Results />
+								</PrivateRoute>
+							}
+						/>
 						<Route
 							path="*"
 							element={
