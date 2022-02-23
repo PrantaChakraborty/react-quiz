@@ -4,7 +4,7 @@ import Video from "./Video";
 
 import useVideList from "../hooks/useVideoList";
 function Videos() {
-	const { loading, error, videos } = useVideList();
+	const { loading, error, videos } = useVideList(0);
 	return (
 		<div className={classes.videos}>
 			{/* if videos array length is greate than 0 */}
