@@ -8,24 +8,26 @@ import {
 	orderByKey,
 	get,
 	startAt,
-    limitToFirst,
+	limitToFirst,
 } from "firebase/database";
+
 export default function useVideList(page) {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const [videos, setVideos] = useState([]);
+    const [hasMore, setHasMore] = useState(true);
 
 	useEffect(() => {
 		async function fetchVideos() {
 			// fetching videos from db
 			const db = getDatabase(); // establish the database connection
 			const vidoesRef = ref(db, "videos"); // ref(database, table name)
-            // will show first 6 videos
+			// will show first 6 videos
 			const videoQuery = query(
 				vidoesRef,
 				orderByKey(),
 				startAt("" + page),
-                limitToFirst(6)
+				limitToFirst(6)
 			);
 			try {
 				setError(false);
@@ -41,7 +43,8 @@ export default function useVideList(page) {
 						];
 					});
 				} else {
-					//
+					// no more data
+                    setHasMore(false);
 				}
 			} catch (err) {
 				console.log(err);
@@ -50,11 +53,12 @@ export default function useVideList(page) {
 			}
 		}
 		fetchVideos();
-	}, []);
+	}, [page]);
 
 	return {
 		loading,
 		error,
 		videos,
+        hasMore
 	};
 }
