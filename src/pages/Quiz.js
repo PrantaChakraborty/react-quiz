@@ -19,7 +19,7 @@ const reducer = (state, action) => {
 			});
 			return action.value;
 		case "answer":
-			const questions = _.cloneDeep(state);  
+			const questions = _.cloneDeep(state);
 			questions[action.questionID].options[action.optionIndex].checked =
 				action.value;
 			return questions;
@@ -59,24 +59,42 @@ export default function Quiz() {
 			value: e.target.checked,
 		});
 	}
-	
+
+	// function for view next questions
+	function nextQuestions() {
+		console.log("next");
+		if (currentQuestion <= questions.length) {
+			setCurrentQuestion((prev) => prev + 1);
+		}
+	}
+
+	// function for view prev questions
+	function prevQuestions() {
+		if (currentQuestion >= 1 && currentQuestion <= questions.length) {
+			setCurrentQuestion((current) => current - 1);
+		}
+	}
+
+	// to calculate percentage
+	const percentage =
+		questions.length > 0
+			? ((currentQuestion + 1) / questions.length) * 100
+			: 0;
 
 	return (
 		<>
-
 			{loading && <div>Loading...</div>}
 			{error && <div>There was an error!</div>}
-			
+
 			{!loading && !error && qna && qna.length > 0 && (
 				<>
-				
 					<h1>{qna[currentQuestion].title}</h1>
 					<h4>Question can have multiple answers</h4>
 					<Answers
 						options={qna[currentQuestion].options}
 						handleChange={handleAnswerChange}
 					/>
-					<ProgressBar />
+					<ProgressBar next={nextQuestions} prev={prevQuestions} percentage={percentage}/>
 					<MiniPlayer />
 				</>
 			)}
