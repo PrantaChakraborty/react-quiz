@@ -3,9 +3,11 @@ import ProgressBar from "../components/ProgressBar";
 import MiniPlayer from "../components/MiniPlayer";
 
 import { useState, useReducer, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import useQuestions from "../hooks/useQuestions";
 import _ from "lodash"; // use to nested obejcts clone
+import { useAuth } from "../contexts/AuthContext";
+import { getDatabase, set, ref } from "firebase/database";
 
 const initialState = null;
 
@@ -30,8 +32,10 @@ const reducer = (state, action) => {
 
 export default function Quiz() {
 	const { id } = useParams();
+	const navigate = useNavigate();
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const { loading, error, questions } = useQuestions(id);
+	const { currentUser } = useAuth();
 
 	// making a clone of questions with adding another property ("checked=false")
 	/*
@@ -75,6 +79,20 @@ export default function Quiz() {
 		}
 	}
 
+	// for submit answers
+	async function submit() {
+		const { uid } = currentUser;
+		const db = getDatabase();
+		const resultRef = ref(db, `result/${uid}`);
+		await set(resultRef, {
+			[id]: qna,
+		});
+		// navigate to result page with state
+		navigate(`/result/${id}`, {
+			state: qna,
+		});
+	}
+
 	// to calculate percentage
 	const percentage =
 		questions.length > 0
@@ -94,7 +112,12 @@ export default function Quiz() {
 						options={qna[currentQuestion].options}
 						handleChange={handleAnswerChange}
 					/>
-					<ProgressBar next={nextQuestions} prev={prevQuestions} percentage={percentage}/>
+					<ProgressBar
+						next={nextQuestions}
+						prev={prevQuestions}
+						percentage={percentage}
+						submit={submit}
+					/>
 					<MiniPlayer />
 				</>
 			)}

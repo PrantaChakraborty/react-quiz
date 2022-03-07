@@ -6,6 +6,7 @@ export default function Answers({ options = [], handleChange }) {
 		<>
 			<div className={classes.answers}>
 				{options.map((option, index) => (
+				
 					<Checkbox
 						key={index}
 						className={`${classes.answer}`}
@@ -14,6 +15,7 @@ export default function Answers({ options = [], handleChange }) {
 						checked={option.checked}
 						onChange={(e) => handleChange(e, index)}
 					/>
+
 				))}
 			</div>
 		</>
