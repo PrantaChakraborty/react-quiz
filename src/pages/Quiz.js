@@ -3,7 +3,7 @@ import ProgressBar from "../components/ProgressBar";
 import MiniPlayer from "../components/MiniPlayer";
 
 import { useState, useReducer, useEffect } from "react";
-import { useParams, useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useQuestions from "../hooks/useQuestions";
 import _ from "lodash"; // use to nested obejcts clone
 import { useAuth } from "../contexts/AuthContext";
@@ -111,6 +111,7 @@ export default function Quiz() {
 					<Answers
 						options={qna[currentQuestion].options}
 						handleChange={handleAnswerChange}
+						input={true}
 					/>
 					<ProgressBar
 						next={nextQuestions}
