@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 
 export default function ProgressBar({ next, prev, percentage, submit }) {
 	const [tooltip, setTooltip] = useState(false);
-	const tooltipRef = useRef();
+	const tooltipRef = useRef(); // to work with dom 
 
 	function toggleTooltip() {
 		if (tooltip) {
