@@ -3,7 +3,7 @@ import ProgressBar from "../components/ProgressBar";
 import MiniPlayer from "../components/MiniPlayer";
 
 import { useState, useReducer, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import useQuestions from "../hooks/useQuestions";
 import _ from "lodash"; // use to nested obejcts clone
 import { useAuth } from "../contexts/AuthContext";
@@ -33,10 +33,13 @@ const reducer = (state, action) => {
 export default function Quiz() {
 	const { id } = useParams();
 	const navigate = useNavigate();
+	
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const { loading, error, questions } = useQuestions(id);
 	const { currentUser } = useAuth();
-
+	const location = useLocation();
+	const {state} = location;
+	const {videoTitle} = state;
 	// making a clone of questions with adding another property ("checked=false")
 	/*
 	question -> 
@@ -119,7 +122,7 @@ export default function Quiz() {
 						percentage={percentage}
 						submit={submit}
 					/>
-					<MiniPlayer  id={id} title={qna[currentQuestion].title}/>
+					<MiniPlayer  id={id} title={videoTitle}/>
 				</>
 			)}
 		</>
